@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 from FYRE import obj
 
 def avg_rating_notes(list: list):
+=======
+from FYRE import main
+
+def avg_rating_notes(list: Student):
+>>>>>>> Stashed changes
     sum1 = 0
     count1 = 0
 
@@ -8,16 +14,26 @@ def avg_rating_notes(list: list):
     count2 = 0
 
     for student in list:
+<<<<<<< Updated upstream
         if student.note_style == "Typed":
            sum1 += int(student.rating)
            count1 +=1
         else:
             sum2 += int(student.rating)
             count2 += 1
+=======
+       if student.note_style == "Typed":
+           sum1 += int(student.rating)
+           count1 +=1
+        else:
+           sum2 += int(student.rating)
+           count2 += 1
+>>>>>>> Stashed changes
     print(count1 + count2)
     dictionary = {"Typed": float(sum1) / count1, "Handwritten": float(sum2) / count2}
     print(dictionary)
 
+<<<<<<< Updated upstream
 'this data could be converted to Handwritten: true, Handwritten: false'
 '''
     types of attributes
@@ -59,3 +75,12 @@ def main():
 
 if __name__ == '__main__':
     main()
+=======
+def avg_rating_attr(attr):
+    '''
+        types of attributes
+        list
+        binary
+        string
+    '''
+>>>>>>> Stashed changes
