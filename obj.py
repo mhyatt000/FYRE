@@ -11,11 +11,18 @@ def string_to_list(list_as_string):
 
 class Student:
 
+    '''
+        potentially make students a static vatiable
+        students = []
+        __init__():
+            students.append(self)
+    '''
+
     def __init__(self, timestamp, grade, major, credit_hours_2020,
         credit_hours_2021, courses,courses_asynchronous,
         courses_synchronous, courses_in_person, focus, strategies_applied,
-        strategies_beneficial, notes_frequency, notes_type, like_questions,
-        structures, strategies, other, feedback, courses_hybrid, online_rating):
+        strategies_beneficial, notes_frequency, notes_is_handwritten, like_questions,
+        structures, strategies, other, feedback, courses_hybrid, rating):
 
         self.timestamp = timestamp
 
@@ -24,7 +31,6 @@ class Student:
         self.credit_hours_2020 = credit_hours_2020
         self.credit_hours_2021 = credit_hours_2021
 
-        'courses'
         self.courses = string_to_list(courses)
 
         self.courses_asynchronous = courses_asynchronous
@@ -36,7 +42,11 @@ class Student:
         self.strategies_beneficial = strategies_beneficial
 
         self.notes_frequency = notes_frequency
-        self.notes_type = notes_type
+
+        if notes_is_handwritten == 'Handwritten':
+            self.notes_is_handwritten = True
+        else:
+            self.notes_is_handwritten = False
 
         self.like_questions = like_questions
         self.structures = structures
@@ -46,7 +56,7 @@ class Student:
         self.feedback = feedback
 
         self.courses_hybrid = courses_hybrid
-        self.online_rating = online_rating
+        self.rating = rating
 
     def contains(self, criterion):
         for a in dir(self):
@@ -66,18 +76,24 @@ class Student:
             print(attr + ": " + getattr(self, attr))
 
     def show(self):
-
-        print(f'{self.grade}, {self.major}')
-        print(f'credit hours: {self.credit_hours_2020} {self.credit_hours_2021}')
-        print(self.courses)
-        print()
-
-        '''
         for a in dir(self):
             if not a.startswith('__') and not callable(getattr(self, a)):
-                print(getattr(self, a))
-                print(a)
-        '''
+                print(a + ': ' + str(getattr(self, a)))
+
+    def set(self, a, value):
+        'generic mutator method'
+        for attr in dir(self):
+            if str(attr) == a:
+                self.attr = value
+
+    def get_attrs(self) -> list:
+        'returns the values of all attributes in a list'
+        attr_list = []
+        for a in dir(self):
+            if not a.startswith('__') and not callable(getattr(self, a)):
+                attr_list.append(getattr(self, a))
+        return attr_list
+
 
 class Poll_Question:
 
