@@ -5,12 +5,11 @@ from FYRE import stat
 import yaml
 
 students = []
+path_csv = '/Users/matthewhyatt/file-storage/loyola/s2/FYRE/input.csv'
+path_yaml = '/Users/matthewhyatt/file-storage/loyola/s2/FYRE/fyre.yaml'
 
 def get():
-    path = input('input .csv path or "n"')
-    if path == 'n':
-        path = '/Users/matthewhyatt/file-storage/loyola/s2/FYRE/input.csv'
-    with open(path, mode='r') as file:
+    with open(path_csv, mode='r') as file:
         reader = csv.reader(file, delimiter=',')
         next(reader)
         students.clear()
@@ -44,7 +43,7 @@ def query(students_in):
         for student in students_q:
             student.show()
 
-def set_attrs(path):
+def set_attrs():
     for student in students:
         print(yaml.dump(student, default_flow_style=False))
         #student.show_all()
@@ -52,12 +51,12 @@ def set_attrs(path):
         if ask == 'y':
             a = input('attribute: ').lower()
             value = input('value: ')
-            student.a = value
+            setattr(student, a, value)
             student.show_attr(a)
         if ask == 'break':
             break
 
-    yaml_save(path, students)
+    yaml_save(path_yaml, students)
 
 def yaml_load(path):
     with open(path, 'r') as file:
@@ -69,6 +68,19 @@ def yaml_load(path):
 def yaml_save(path, data):
     with open(path, 'w') as file:
         yaml.dump(data, file, indent=4, sort_keys=False)
+
+def clean():
+    attr = input('which attribute to clean? ').lower()
+    for student in students:
+        student.show_attr(attr)
+        ask = input('set? (y/n/break) ').lower()
+        if ask == 'y':
+            val = input('input: ').lower()
+            setattr(student, attr, val)
+            student.show_attr(attr)
+        if ask == 'break':
+            break
+    yaml_save(path_yaml, students)
 
 def main():
     path = '/Users/matthewhyatt/fyre.yaml'
@@ -97,16 +109,15 @@ def main():
             stat.avg_rating_attr(students, a)
 
         if arg == 'set':
-            print('cannot currently set data')
-            #set_attrs(path)
+            set_attrs()
 
         if arg == 'save':
-            yaml_save(path, students)
+            yaml_save(path_yaml, students)
 
         if arg == 'load':
             try:
                 students.clear()
-                yaml_load(path)
+                yaml_load(path_yaml)
                 print('loaded yaml')
             except:
                 pass
@@ -114,7 +125,9 @@ def main():
         if arg == 'len':
             print(len(students))
 
-
+        if arg == 'clean':
+            clean()
+        print()
 
 if __name__ == '__main__':
     main()

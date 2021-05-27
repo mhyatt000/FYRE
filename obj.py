@@ -80,11 +80,6 @@ class Student:
             if not a.startswith('__') and not callable(getattr(self, a)):
                 print(a + ': ' + str(getattr(self, a)))
 
-    def set(self, a, value):
-        'generic mutator method'
-        for attr in dir(self):
-            if str(attr) == a:
-                self.attr = value
 
     def get_attrs(self) -> list:
         'returns the values of all attributes in a list'

@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
 from FYRE import obj
 
 def avg_rating_notes(list: list):
-=======
-from FYRE import main
-
-def avg_rating_notes(list: Student):
->>>>>>> Stashed changes
     sum1 = 0
     count1 = 0
 
@@ -14,26 +8,16 @@ def avg_rating_notes(list: Student):
     count2 = 0
 
     for student in list:
-<<<<<<< Updated upstream
         if student.note_style == "Typed":
            sum1 += int(student.rating)
            count1 +=1
         else:
             sum2 += int(student.rating)
             count2 += 1
-=======
-       if student.note_style == "Typed":
-           sum1 += int(student.rating)
-           count1 +=1
-        else:
-           sum2 += int(student.rating)
-           count2 += 1
->>>>>>> Stashed changes
     print(count1 + count2)
     dictionary = {"Typed": float(sum1) / count1, "Handwritten": float(sum2) / count2}
     print(dictionary)
 
-<<<<<<< Updated upstream
 'this data could be converted to Handwritten: true, Handwritten: false'
 '''
     types of attributes
@@ -41,46 +25,44 @@ def avg_rating_notes(list: Student):
         binary
         string
 '''
+
+def avg_rating_val(students: list, a, val):
+    sum = 0
+    count = 0
+
+    for student in students:
+        if getattr(student, a) == val:
+            'the ratings are stored as strings rn'
+            sum += int(student.rating)
+            count += 1
+    print(f'average rating for {a} == {val}: {float(sum) / count}')
+
 def avg_rating_attr(students: list, a):
-    'if attribute is binary (True/False) then provide both average ratings'
-    'else do nothing'
-    try:
-        if isinstance(getattr(students[0], a), bool):
-            sum_true = 0
-            count_true = 0
 
-            sum_false = 0
-            count_false = 0
+    'boolean'
+    if isinstance(getattr(students[0], a), bool):
+        avg_rating_val(students, a, True)
+        avg_rating_val(students, a, False)
 
-            for student in students:
-                if getattr(student, a):
-                    sum_true += int(student.rating)
-                    count_true +=1
-                else:
-                    sum_false += int(student.rating)
-                    count_false += 1
+    'string'
+    if isinstance(getattr(students[0], a), str):
+        uniquevals = set({})
+        for student in students:
+            uniquevals.add(getattr(student, a))
 
+        for s_val in uniquevals:
+            avg_rating_val(students, a, s_val)
 
-            print(count1 + count2)
-            dictionary = {f'{a} true: ': float(sum1) / count1, f'{a} false: ': float(sum2) / count2}
-            print(dictionary)
-        else:
-            print(f'{a} is not boolean')
-            print('will be handled in future revisions')
-    except AttributeError:
-        print(f'Student object has no attribute {a}')
+    'list'
+    if isinstance(getattr(students[0], a), str):
+        pass
+        
+    'another data type'
+    print(f'{a} is {type(getattr(students[0], a))}')
+    print('more types will be handled in future revisions')
 
 def main():
     print('stat')
 
 if __name__ == '__main__':
     main()
-=======
-def avg_rating_attr(attr):
-    '''
-        types of attributes
-        list
-        binary
-        string
-    '''
->>>>>>> Stashed changes
