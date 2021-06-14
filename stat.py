@@ -18,14 +18,6 @@ def avg_rating_notes(list: list):
     dictionary = {"Typed": float(sum1) / count1, "Handwritten": float(sum2) / count2}
     print(dictionary)
 
-'this data could be converted to Handwritten: true, Handwritten: false'
-'''
-    types of attributes
-        list
-        binary
-        string
-'''
-
 def avg_rating_val(students: list, a, val):
     sum = 0
     count = 0
@@ -56,7 +48,7 @@ def avg_rating_attr(students: list, a):
     'list'
     if isinstance(getattr(students[0], a), str):
         pass
-        
+
     'another data type'
     print(f'{a} is {type(getattr(students[0], a))}')
     print('more types will be handled in future revisions')
